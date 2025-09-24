@@ -223,12 +223,12 @@
         {
           "kind": "class",
           "description": "Code widget for WebAssembly with compilation and execution capabilities.",
-          "name": "CodeHTML",
+          "name": "CodeWebAssembly",
           "superclass": {
             "name": "Code",
             "module": "/src/shared/ww-code-template"
           },
-          "tagName": "webwriter-code-html",
+          "tagName": "webwriter-code-webassembly",
           "customElement": true
         }
       ],
@@ -237,7 +237,7 @@
           "kind": "js",
           "name": "default",
           "declaration": {
-            "name": "CodeHTML",
+            "name": "CodeWebAssembly",
             "module": "src/webassembly/ww-code-webassembly.ts"
           }
         },
@@ -245,7 +245,7 @@
           "kind": "custom-element-definition",
           "name": "webwriter-code-webassembly",
           "declaration": {
-            "name": "CodeHTML",
+            "name": "CodeWebAssembly",
             "module": "src/webassembly/ww-code-webassembly.ts"
           }
         }
