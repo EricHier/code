@@ -8,7 +8,7 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "Code widget for HTML with live preview functionality.",
+          "description": "Code widget for WebAssembly with compilation and execution capabilities.\r\n\r\nProvides a comprehensive WebAssembly development environment supporting both\r\nWebAssembly Text Format (WAT) and binary WebAssembly (WASM) compilation and execution.\r\nUses the WABT (WebAssembly Binary Toolkit) for client-side compilation and the\r\nbrowser's native WebAssembly runtime for execution.\r\n\r\n## Key Features\r\n- **WAT syntax support** - WebAssembly Text Format editing with syntax highlighting\r\n- **Client-side compilation** - WAT to WASM compilation in the browser\r\n- **Native execution** - Uses browser's WebAssembly runtime for optimal performance\r\n- **Error reporting** - Detailed compilation and runtime error diagnostics\r\n- **WABT integration** - Industry-standard WebAssembly toolchain\r\n- **Memory inspection** - Access to WebAssembly linear memory\r\n- **Function exports** - Call WebAssembly functions from JavaScript\r\n- **Inherited functionality** - All base Code component features\r\n\r\n## WebAssembly Environment\r\nThe WebAssembly environment provides low-level programming capabilities with:\r\n- Direct memory management\r\n- Efficient numeric computations\r\n- Near-native performance\r\n- Secure sandboxed execution\r\n- Interoperability with JavaScript\r\n\r\n## Compilation Process\r\n1. WebAssembly Text Format (WAT) source code is written by the user\r\n2. WABT's wat2wasm compiler converts WAT to binary WASM format\r\n3. Compilation errors are reported with line numbers and descriptions\r\n4. Successfully compiled modules are instantiated and executed\r\n5. Exported functions can be called and results displayed\r\n\r\n## Performance Characteristics\r\n- **Compilation speed** - Fast WAT to WASM compilation\r\n- **Execution speed** - Near-native performance for computational tasks\r\n- **Memory efficiency** - Direct control over memory allocation\r\n- **Startup time** - Quick instantiation of compiled modules\r\n\r\n## Usage Examples\r\n\r\n@example Basic WebAssembly function:\r\n```html\r\n<webwriter-code-webassembly \r\n  code=\"(module (func $add (param $a i32) (param $b i32) (result i32) local.get $a local.get $b i32.add) (export \\\"add\\\" (func $add)))\"\r\n  auto-run=\"true\"\r\n  show-execution-time=\"true\">\r\n</webwriter-code-webassembly>\r\n```\r\n\r\n@example Memory manipulation example:\r\n```html\r\n<webwriter-code-webassembly \r\n  code=\"(module (memory 1) (func $store (param $addr i32) (param $value i32) local.get $addr local.get $value i32.store) (func $load (param $addr i32) (result i32) local.get $addr i32.load) (export \\\"memory\\\" (memory 0)) (export \\\"store\\\" (func $store)) (export \\\"load\\\" (func $load)))\"\r\n  runnable=\"true\"\r\n  show-execution-count=\"true\">\r\n</webwriter-code-webassembly>\r\n```\r\n\r\n@example Educational template with module structure:\r\n```html\r\n<webwriter-code-webassembly \r\n  code=\"(module\\n  ;; Your function here\\n  (func $main (result i32)\\n    ;; TODO: Add your logic\\n    i32.const 42\\n  )\\n  (export \\\"main\\\" (func $main))\\n)\"\r\n  locked-lines=\"[1, 2, 6, 7, 8]\"\r\n  autocomplete=\"true\">\r\n</webwriter-code-webassembly>\r\n```\r\n\r\n@example Mathematical computation:\r\n```html\r\n<webwriter-code-webassembly \r\n  code=\"(module (func $factorial (param $n i32) (result i32) (local $result i32) (local $i i32) i32.const 1 local.set $result i32.const 1 local.set $i (loop $loop local.get $i local.get $n i32.gt_s if return local.get $result end local.get $result local.get $i i32.mul local.set $result local.get $i i32.const 1 i32.add local.set $i br $loop) local.get $result) (export \\\"factorial\\\" (func $factorial)))\"\r\n  visible=\"true\"\r\n  show-execution-time=\"true\">\r\n</webwriter-code-webassembly>\r\n```\r\n\r\n## WebAssembly Features Supported\r\n- **Core WebAssembly** - All standard WebAssembly instructions\r\n- **Value types** - i32, i64, f32, f64 numeric types\r\n- **Control flow** - Blocks, loops, branches, calls\r\n- **Memory operations** - Linear memory load/store operations\r\n- **Function calls** - Direct and indirect function calls\r\n- **Imports/Exports** - Module interface definitions\r\n- **Local variables** - Function-local variable management\r\n- **Global variables** - Module-level global state\r\n\r\n## Limitations\r\n- **WAT syntax only** - Does not support other WebAssembly source languages\r\n- **WASI not included** - System interface not available\r\n- **Limited imports** - Only basic JavaScript interop supported\r\n- **Debugging tools** - Limited debugging capabilities compared to native tools\r\n\r\n## Properties\r\nInherits all properties from the base `Code` class. No additional properties are defined.\r\n\r\n## Methods\r\nUses the inherited methods from the base `Code` class. No additional public methods.\r\n\r\n## Events\r\nUses the inherited event handling from the base `Code` class.\r\n\r\n## CSS Parts\r\n- `options` - The settings panel (inherited from base class)\r\n\r\n## Slots\r\nThis component does not use slots.",
           "name": "CodeHTML",
           "superclass": {
             "name": "Code",
@@ -43,27 +43,9 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "Code widget for JavaScript with execution capabilities.",
+          "description": "Code widget for JavaScript with execution capabilities.\r\n\r\nProvides a comprehensive JavaScript development environment with real-time execution,\r\nconsole output capture, and rich object inspection. Uses a sandboxed web worker\r\nfor safe code execution while maintaining full access to JavaScript language features\r\nand built-in objects.\r\n\r\n## Key Features\r\n- **Modern JavaScript support** - ES2022+ syntax and features\r\n- **Console integration** - Full console.log, warn, error, and other methods\r\n- **Object inspection** - Rich display of objects, arrays, and complex data types\r\n- **Error handling** - Runtime error capture with stack traces\r\n- **Sandboxed execution** - Safe execution environment using web workers\r\n- **Real-time output** - Live console output as code executes\r\n- **Interactive debugging** - Expandable object trees and detailed value display\r\n- **Inherited functionality** - All base Code component features\r\n\r\n## JavaScript Environment\r\nThe JavaScript execution environment runs in a dedicated web worker, providing:\r\n- Isolation from the main thread for performance and security\r\n- Access to standard JavaScript built-ins and Web APIs\r\n- Console output capture and formatting\r\n- Error handling with detailed stack traces\r\n- Object serialization for rich display\r\n\r\n## Execution Model\r\n1. JavaScript code is sent to a web worker for execution\r\n2. Console methods (log, warn, error) are intercepted and captured\r\n3. Values are serialized with type information for rich display\r\n4. Objects can be expanded on-demand for inspection\r\n5. Errors are caught and formatted with line number information\r\n\r\n## Console Features\r\nThe component captures and displays all console output with:\r\n- **console.log()** - Standard output with value formatting\r\n- **console.warn()** - Warning messages with appropriate styling\r\n- **console.error()** - Error messages with stack traces\r\n- **console.clear()** - Clears the output display\r\n- **Return values** - Expression results displayed automatically\r\n\r\n## Usage Examples",
           "name": "CodeJavaScript",
-          "members": [
-            {
-              "kind": "method",
-              "name": "build",
-              "return": {
-                "type": {
-                  "text": "string"
-                }
-              },
-              "parameters": [
-                {
-                  "name": "code",
-                  "type": {
-                    "text": "string"
-                  }
-                }
-              ]
-            }
-          ],
+          "members": [],
           "superclass": {
             "name": "CodeJsTemplate",
             "module": "/src/javascript/shared/ww-code-js-template"
@@ -97,9 +79,8 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "Code widget for Java with compilation and execution capabilities using TeaVM (Java 21).",
+          "description": "Code widget for Java with compilation and execution capabilities using TeaVM (Java 21).\r\n\r\nProvides a full Java development environment in the browser using TeaVM to compile\r\nJava source code to WebAssembly and JavaScript. Supports modern Java language\r\nfeatures up to Java 21, with compilation and execution happening entirely client-side.\r\n\r\n## Key Features\r\n- **Java 21 language support** with modern syntax and features\r\n- **Client-side compilation** - No server required for Java development\r\n- **Real-time execution** with output capture and display\r\n- **Compilation error reporting** with line-by-line diagnostics\r\n- **TeaVM-powered** - Mature Java-to-WebAssembly/JavaScript transpiler\r\n- **Standard library support** - Core Java classes and utilities\r\n- **Inherited functionality** - All base Code component features\r\n\r\n## Java Environment\r\nThe Java environment uses TeaVM to compile Java source code to JavaScript/WebAssembly\r\nfor execution in the browser. This provides good performance while maintaining\r\ncompatibility with standard Java syntax and core library classes.\r\n\r\n## Compilation Process\r\n1. Java source code is sent to a web worker running the Java compiler\r\n2. TeaVM compiles the code to JavaScript/WebAssembly\r\n3. Compilation errors are reported with line numbers and descriptions\r\n4. Successfully compiled code is executed and output is captured\r\n\r\n## Performance Considerations\r\n- Initial compilation may take a moment as the compiler initializes\r\n- Subsequent compilations are faster with the warm compiler\r\n- Large programs or complex computations perform well via WebAssembly\r\n- Memory usage is managed by the browser's JavaScript engine\r\n\r\n## Usage Examples",
           "name": "CodeJava",
-          "members": [],
           "superclass": {
             "name": "Code",
             "module": "/src/shared/ww-code-template"
@@ -133,27 +114,9 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "Code widget for TypeScript with compilation and execution capabilities.",
+          "description": "Code widget for TypeScript with compilation and execution capabilities.\r\n\r\nProvides a comprehensive TypeScript development environment with client-side compilation\r\nto JavaScript and real-time execution. Uses the official TypeScript compiler for\r\ntype checking and code transformation, providing a full-featured TypeScript experience\r\nin the browser.\r\n\r\n## Key Features\r\n- **Full TypeScript support** - Complete TypeScript language features and syntax\r\n- **Client-side compilation** - TypeScript to JavaScript compilation in the browser\r\n- **Type checking** - Real-time type error detection and reporting\r\n- **Modern JavaScript output** - Compiles to modern JavaScript for execution\r\n- **Compilation diagnostics** - Detailed error messages with line numbers\r\n- **Console integration** - Full console output capture like JavaScript widget\r\n- **Object inspection** - Rich display of typed objects and complex data\r\n- **Strict mode compilation** - Enhanced type safety with strict TypeScript settings\r\n- **Inherited functionality** - All JavaScript widget features plus TypeScript compilation\r\n\r\n## TypeScript Environment\r\nThe TypeScript environment provides:\r\n- Full TypeScript language server capabilities\r\n- Strict type checking with compiler options\r\n- CommonJS module output for browser execution\r\n- Compilation error reporting with precise locations\r\n- Type-aware syntax highlighting\r\n\r\n## Compilation Process\r\n1. TypeScript source code is written by the user\r\n2. The TypeScript compiler (`transpileModule`) processes the code\r\n3. Type errors are collected and displayed with line/column information\r\n4. Successfully compiled JavaScript is executed in a web worker\r\n5. Console output and results are displayed with rich formatting\r\n\r\n## Compiler Configuration\r\nThe TypeScript compiler is configured with:\r\n- **Module system**: CommonJS for browser compatibility\r\n- **Strict mode**: Enabled for enhanced type safety\r\n- **Diagnostic reporting**: Full error and warning reporting\r\n- **Target**: Modern JavaScript output\r\n\r\n## Usage Examples",
           "name": "CodeTypeScript",
-          "members": [
-            {
-              "kind": "method",
-              "name": "build",
-              "return": {
-                "type": {
-                  "text": "string"
-                }
-              },
-              "parameters": [
-                {
-                  "name": "code",
-                  "type": {
-                    "text": "string"
-                  }
-                }
-              ]
-            }
-          ],
+          "members": [],
           "superclass": {
             "name": "CodeJsTemplate",
             "module": "/src/javascript/shared/ww-code-js-template"
@@ -187,7 +150,7 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "Code widget for Python with execution capabilities using Pyodide.",
+          "description": "Code widget for Python with execution capabilities using Pyodide.\r\n\r\nProvides a comprehensive Python code editor with full execution support via Pyodide,\r\na Python distribution for the browser. Supports most Python standard library\r\nfunctionality and many popular packages like NumPy, Pandas, and Matplotlib.\r\n\r\n## Key Features\r\n- **Full Python 3.x support** via Pyodide WebAssembly runtime\r\n- **Rich library ecosystem** - Access to NumPy, Pandas, Matplotlib, and more\r\n- **Real-time execution** with output capture and display\r\n- **Error reporting** with line-by-line diagnostics\r\n- **Package installation** support for pure Python packages\r\n- **Matplotlib integration** for data visualization\r\n- **Inherited functionality** - All base Code component features\r\n\r\n## Python Environment\r\nThe Python environment is isolated and runs entirely in the browser using WebAssembly.\r\nEach execution creates a fresh context, so variables don't persist between runs\r\nunless explicitly managed by the execution environment.\r\n\r\n## Performance Considerations\r\n- Initial load may take time as Pyodide is downloaded and initialized\r\n- Large computations run entirely in the browser\r\n- Memory is limited by browser constraints\r\n- Some CPU-intensive operations may be slower than native Python\r\n\r\n## Usage Examples",
           "name": "CodePython",
           "superclass": {
             "name": "Code",
@@ -222,13 +185,13 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "Code widget for WebAssembly with compilation and execution capabilities.",
-          "name": "CodeHTML",
+          "description": "Code widget for WebAssembly with compilation and execution capabilities.\r\n\r\nProvides a comprehensive WebAssembly development environment supporting both\r\nWebAssembly Text Format (WAT) and binary WebAssembly (WASM) compilation and execution.\r\nUses the WABT (WebAssembly Binary Toolkit) for client-side compilation and the\r\nbrowser's native WebAssembly runtime for execution.\r\n\r\n## Key Features\r\n- **WAT syntax support** - WebAssembly Text Format editing with syntax highlighting\r\n- **Client-side compilation** - WAT to WASM compilation in the browser\r\n- **Native execution** - Uses browser's WebAssembly runtime for optimal performance\r\n- **Error reporting** - Detailed compilation and runtime error diagnostics\r\n- **WABT integration** - Industry-standard WebAssembly toolchain\r\n- **Memory inspection** - Access to WebAssembly linear memory\r\n- **Function exports** - Call WebAssembly functions from JavaScript\r\n- **Inherited functionality** - All base Code component features\r\n\r\n## WebAssembly Environment\r\nThe WebAssembly environment provides low-level programming capabilities with:\r\n- Direct memory management\r\n- Efficient numeric computations\r\n- Near-native performance\r\n- Secure sandboxed execution\r\n- Interoperability with JavaScript\r\n\r\n## Compilation Process\r\n1. WebAssembly Text Format (WAT) source code is written by the user\r\n2. WABT's wat2wasm compiler converts WAT to binary WASM format\r\n3. Compilation errors are reported with line numbers and descriptions\r\n4. Successfully compiled modules are instantiated and executed\r\n5. Exported functions can be called and results displayed\r\n\r\n## Performance Characteristics\r\n- **Compilation speed** - Fast WAT to WASM compilation\r\n- **Execution speed** - Near-native performance for computational tasks\r\n- **Memory efficiency** - Direct control over memory allocation\r\n- **Startup time** - Quick instantiation of compiled modules\r\n\r\n## Usage Examples",
+          "name": "CodeWebAssembly",
           "superclass": {
             "name": "Code",
             "module": "/src/shared/ww-code-template"
           },
-          "tagName": "webwriter-code-html",
+          "tagName": "webwriter-code-webassembly",
           "customElement": true
         }
       ],
@@ -237,7 +200,7 @@
           "kind": "js",
           "name": "default",
           "declaration": {
-            "name": "CodeHTML",
+            "name": "CodeWebAssembly",
             "module": "src/webassembly/ww-code-webassembly.ts"
           }
         },
@@ -245,7 +208,7 @@
           "kind": "custom-element-definition",
           "name": "webwriter-code-webassembly",
           "declaration": {
-            "name": "CodeHTML",
+            "name": "CodeWebAssembly",
             "module": "src/webassembly/ww-code-webassembly.ts"
           }
         }
